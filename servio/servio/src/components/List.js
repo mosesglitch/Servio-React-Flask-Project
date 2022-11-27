@@ -1,0 +1,68 @@
+import React from "react";
+import {
+  MDBCol,
+  MDBContainer,
+  MDBRow,
+  MDBCard,
+  MDBIcon,
+  MDBBadge,
+  MDBCardFooter,
+  MDBCardText,
+  MDBCardBody,
+  MDBCardImage,
+  MDBBtn,
+  MDBTypography,
+} from "mdb-react-ui-kit";
+const List = ({ data }) => {
+  const SProviderList = [];
+  for (let i = 0; i < data.name.length; i++) {
+    SProviderList.push({
+      name: data.name[i],
+      age: data.age[i],
+      programming: data.programming[i],
+    });
+  }
+
+  console.log("unawenge", SProviderList);
+  const SProvider = SProviderList.map((sp) => (
+    <MDBCol xl={6} className="mb-4">
+      <MDBCard>
+        <MDBCardBody>
+          <div className="d-flex justify-content-between align-items-center">
+            <div className="d-flex align-items-center">
+              <img
+                src="https://mdbootstrap.com/img/new/avatars/8.jpg"
+                alt=""
+                style={{ width: "45px", height: "45px" }}
+                className="rounded-circle"
+              />
+              <div className="ms-3">
+                <p className="fw-bold mb-1">{sp.name}</p>
+                <p className="text-muted mb-0">john.doe@gmail.com</p>
+              </div>
+            </div>
+            <MDBBadge pill color="success" light>
+              {sp.programming}
+            </MDBBadge>
+          </div>
+        </MDBCardBody>
+        <MDBCardFooter
+          background="light"
+          border="0"
+          className="p-2 d-flex justify-content-around"
+        >
+          <MDBBtn color="link" rippleColor="primary" className="text-reset m-0">
+            Message <MDBIcon fas icon="envelope" />
+          </MDBBtn>
+          <MDBBtn color="link" rippleColor="primary" className="text-reset m-0">
+            Call <MDBIcon fas icon="phone" />
+          </MDBBtn>
+        </MDBCardFooter>
+      </MDBCard>
+    </MDBCol>
+  ));
+  console.log("yes", data.name);
+  return <MDBRow>{SProvider}</MDBRow>;
+};
+
+export default List;
