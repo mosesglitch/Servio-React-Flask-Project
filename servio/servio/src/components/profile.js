@@ -12,7 +12,7 @@ import {
   MDBIcon,
 } from "mdb-react-ui-kit";
 
-export default function EditButton() {
+export default function profilePage({ data }) {
   return (
     <div className="gradient-custom-2" style={{ backgroundColor: "#9de2ff" }}>
       <MDBContainer className="py-5 h-100">
@@ -43,8 +43,8 @@ export default function EditButton() {
                   </MDBBtn>
                 </div>
                 <div className="ms-3" style={{ marginTop: "130px" }}>
-                  <MDBTypography tag="h5">Andy Horwitz</MDBTypography>
-                  <MDBCardText>New York</MDBCardText>
+                  <MDBTypography tag="h5">{data[0].name}</MDBTypography>
+                  <MDBCardText>{data[0].location}</MDBCardText>
                 </div>
               </div>
               <div
@@ -99,7 +99,7 @@ export default function EditButton() {
                   <p className="lead fw-normal mb-1">About</p>
                   <div className="p-4" style={{ backgroundColor: "#f8f9fa" }}>
                     <MDBCardText className="font-italic mb-1">
-                      Web Developer
+                      {data[0].skill}
                     </MDBCardText>
                     <MDBCardText className="font-italic mb-1">
                       Lives in New York

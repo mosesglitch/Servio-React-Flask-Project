@@ -3,30 +3,13 @@ import $ from "jquery";
 import ProfilePage from "./components/profile";
 import Dropdown from "./components/Dropdown";
 import "./components/styles.css";
-
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import List from "./components/List";
 import ProfileForm from "./components/ProfileForm";
+import MyNavbar from "./components/Navbar";
+import profilePage from "./components/profile";
+
 function App() {
-  const [data, setdata] = useState([]);
-  useEffect(() => {
-    $.ajax({
-      url: `/profile`,
-      type: "GET",
-      dataType: "json",
-      success: (result) => {
-        console.log(result.service);
-        setdata({
-          name: result.service,
-        });
-        return;
-      },
-      error: (error) => {
-        alert("Unable to load data. Please try your request again");
-        return;
-      },
-    });
-  }, []);
-  console.log(data);
   // useEffect(() => {
   //   fetch("/members")
   //     .then((res) => {
@@ -46,11 +29,35 @@ function App() {
 
   return (
     <div>
-      <h1>React and flask</h1>
-
-      <ProfileForm />
-      {/* <List data={data} /> */}
-      <ProfilePage />
+      <MyNavbar />
+      {/* <Router>
+        <div className="App">
+          <ul className="App-header">
+            <li>
+              <Link to="/">Home</Link>
+            </li>
+            <li>
+              <Link to="/profile">Profile</Link>
+            </li>
+            <li>
+              <Link to="/list">List</Link>
+            </li>
+          </ul>
+          <Routes>
+            {/* <Route exact path="/" element={<Home />}></Route> */}
+      {/* <Route
+              exact
+              path="/profile"
+              element={<ProfilePage data={profiles} />}
+            ></Route>
+            <Route
+              exact
+              path="/list"
+              element={<List data={profiles} />}
+            ></Route>
+          </Routes> */}
+      {/* </div> */}
+      {/* </Router> */} */
     </div>
   );
 }

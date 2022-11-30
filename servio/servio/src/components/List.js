@@ -14,8 +14,8 @@ import {
   MDBTypography,
 } from "mdb-react-ui-kit";
 const List = ({ data }) => {
-  console.log("unawenge", SProviderList);
-  const SProvider = SProviderList.map((sp) => (
+  console.log("unawenge", data);
+  const SProvider = data.map((sp) => (
     <MDBCol xl={6} className="mb-4">
       <MDBCard>
         <MDBCardBody>
@@ -33,7 +33,7 @@ const List = ({ data }) => {
               </div>
             </div>
             <MDBBadge pill color="success" light>
-              {sp.programming}
+              {sp.availability}
             </MDBBadge>
           </div>
         </MDBCardBody>
@@ -52,7 +52,6 @@ const List = ({ data }) => {
       </MDBCard>
     </MDBCol>
   ));
-  console.log("yes", data.name);
   return <MDBRow>{SProvider}</MDBRow>;
 };
 

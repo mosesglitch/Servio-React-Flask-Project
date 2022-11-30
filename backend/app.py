@@ -21,7 +21,7 @@ with app.app_context():
 def get_time():
     try:
         serves = Service_info.query.order_by(Service_info.id).all()
-        print(serves)
+       
         return jsonify({"success": True,"service": [serve.long() for serve in serves]})
     except:
         abort(422)
