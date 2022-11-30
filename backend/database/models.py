@@ -6,8 +6,8 @@ import json
 # database_filename = "database.db"
 # project_dir = os.path.dirname(os.path.abspath(__file__))
 # database_path = "sqlite:///{}".format(os.path.join(project_dir, database_filename))
-database_name = 'coffee'
-database_path = 'postgresql://{}:{}@{}/{}'.format('mosee','chapo','localhost:5432', database_name)
+database_name = 'serviojs'
+database_path = 'postgresql://{}:{}@{}/{}'.format('paps','chapo','localhost:5432', database_name)
 
 db = SQLAlchemy()
 
@@ -22,6 +22,7 @@ def setup_db(app):
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
     db.app = app
     db.init_app(app)
+    
 
 
 '''
@@ -36,14 +37,31 @@ def db_drop_and_create_all():
     db.drop_all()
     db.create_all()
     # add one demo row which is helping in POSTMAN test
-    drink = Drink(
-        title='water',
-        recipe='[{"name": "water", "color": "blue", "parts": 1}]'
+    server = Service_info(
+        # title='water',
+        # recipe='[{"name": "water", "color": "blue", "parts": 1}]',
+        # String Title
+        name   = 'Kimani',
+        # the ingredients blob - this stores a lazy json blob
+        # the required datatype is [{'color': string, 'name':string, 'parts':number}]
+        location = 'Lucky Summer',
+
+        about = 'Glow Everyday',
+
+        skill = 'Makeup artist',
+
+        availability = 'Available',
 
     )
-
-
-    drink.insert()
+    masseuse = Service_info(
+        name   = 'Regina',
+        location = 'Westlands',
+        about = 'Relax',
+        skill = 'Masseuse',
+        availability = 'Closed',
+    )
+    server.insert()
+    masseuse.insert()
 # ROUTES
 
 '''
@@ -52,27 +70,34 @@ a persistent drink entity, extends the base SQLAlchemy Model
 '''
 
 
-class Drink(db.Model):
+class Service_info(db.Model):
     # Autoincrementing, unique primary key
     id = Column(Integer().with_variant(Integer, "sqlite"), primary_key=True)
     # String Title
-    title = Column(String(80), unique=True)
+    name   = Column(String(80), unique=True)
     # the ingredients blob - this stores a lazy json blob
     # the required datatype is [{'color': string, 'name':string, 'parts':number}]
-    recipe = Column(String(180), nullable=False)
+    location = Column(String(80))
 
+    about = Column(String(180), nullable=True)
+
+    skill = Column(String(180),nullable=False)
+
+    availability = Column(String(50),nullable=True)
     '''
     short()
         short form representation of the Drink model
     '''
 
     def short(self):
-        print(json.loads(self.recipe))
-        short_recipe = [{'color': r['color'], 'parts': r['parts']} for r in json.loads(self.recipe)]
+        # short_recipe = [{'color': r['color'], 'parts': r['parts']} for r in json.loads(self.recipe)]
         return {
             'id': self.id,
-            'title': self.title,
-            'recipe': short_recipe
+            'name': self.name,
+            'location': self.location,
+            "about":self.location,
+            "skill":self.skill,
+            'availability':self.availability
         }
 
     '''
@@ -81,13 +106,14 @@ class Drink(db.Model):
     '''
 
     def long(self):
-        print("deathrow")
-        print(self.id)
-        print("deathrow")
         return {
             'id': self.id,
-            'title': self.title,
-            'recipe': json.loads(self.recipe)
+            'name': self.name,
+            'location': self.location,
+            "about":self.location,
+            "skill":self.skill,
+            'availability':self.availability
+            # 'recipe': json.loads(self.recipe)
         }
 
     '''

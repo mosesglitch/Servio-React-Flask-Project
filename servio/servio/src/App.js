@@ -7,21 +7,16 @@ import "./components/styles.css";
 import List from "./components/List";
 import ProfileForm from "./components/ProfileForm";
 function App() {
-  const [data, setdata] = useState({
-    name: {},
-    age: {},
-    programming: {},
-  });
+  const [data, setdata] = useState([]);
   useEffect(() => {
     $.ajax({
       url: `/profile`,
       type: "GET",
       dataType: "json",
       success: (result) => {
+        console.log(result.service);
         setdata({
-          name: result.data.Name,
-          age: result.data.Age,
-          programming: result.data.programming,
+          name: result.service,
         });
         return;
       },
@@ -54,7 +49,7 @@ function App() {
       <h1>React and flask</h1>
 
       <ProfileForm />
-      <List data={data} />
+      {/* <List data={data} /> */}
       <ProfilePage />
     </div>
   );

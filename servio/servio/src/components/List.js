@@ -14,15 +14,6 @@ import {
   MDBTypography,
 } from "mdb-react-ui-kit";
 const List = ({ data }) => {
-  const SProviderList = [];
-  for (let i = 0; i < data.name.length; i++) {
-    SProviderList.push({
-      name: data.name[i],
-      age: data.age[i],
-      programming: data.programming[i],
-    });
-  }
-
   console.log("unawenge", SProviderList);
   const SProvider = SProviderList.map((sp) => (
     <MDBCol xl={6} className="mb-4">
