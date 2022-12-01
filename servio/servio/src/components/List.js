@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   MDBCol,
   MDBContainer,
@@ -13,10 +13,12 @@ import {
   MDBBtn,
   MDBTypography,
 } from "mdb-react-ui-kit";
+import ProfilePage from "./profile";
 const List = ({ data }) => {
-  console.log("unawenge", data);
+  const [selectedSP, setSelectedSP] = useState("0");
+  console.log(selectedSP);
   const SProvider = data.map((sp) => (
-    <MDBCol xl={6} className="mb-4">
+    <MDBCol xl={6} className="mb-4" onClick={() => setSelectedSP(sp.id)}>
       <MDBCard>
         <MDBCardBody>
           <div className="d-flex justify-content-between align-items-center">
@@ -52,7 +54,12 @@ const List = ({ data }) => {
       </MDBCard>
     </MDBCol>
   ));
-  return <MDBRow>{SProvider}</MDBRow>;
+  return (
+    <>
+      <MDBRow>{SProvider}</MDBRow>
+      {/* <ProfilePage selectedSP={selectedSP} /> */}
+    </>
+  );
 };
 
 export default List;

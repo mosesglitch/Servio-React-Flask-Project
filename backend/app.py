@@ -31,7 +31,31 @@ def get_time():
     #     "programming":["python",'c','js']}
     # return jsonify(data=data)
         
-  
+@app.route('/addprofile',methods=['POST'])
+# @requires_auth('post:drinks')
+def add_profile():
+    try:
+        body = request.get_json()
+        name = body.get("name",None)
+        location = body.get("location",None)
+        about = body.get("about",None)
+        skill = body.get("skill",None)
+        availability = body.get("availability",None)
+        newprofile  =  Service_info(
+        name = name,
+        location=location,
+        about=about,
+        skill=skill,
+        availability=availability
+        # recipe = json.dumps(recipe)
+        )
+        newprofile.insert()
+        print(name, availability,skill)
+        first = Service_info.query.first()
+        print(first)
+        return jsonify({"success": True}),200
+    except:
+        abort(422) 
       
 # Running app
 if __name__ == '__main__':

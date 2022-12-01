@@ -30,34 +30,7 @@ function App() {
   return (
     <div>
       <MyNavbar />
-      {/* <Router>
-        <div className="App">
-          <ul className="App-header">
-            <li>
-              <Link to="/">Home</Link>
-            </li>
-            <li>
-              <Link to="/profile">Profile</Link>
-            </li>
-            <li>
-              <Link to="/list">List</Link>
-            </li>
-          </ul>
-          <Routes>
-            {/* <Route exact path="/" element={<Home />}></Route> */}
-      {/* <Route
-              exact
-              path="/profile"
-              element={<ProfilePage data={profiles} />}
-            ></Route>
-            <Route
-              exact
-              path="/list"
-              element={<List data={profiles} />}
-            ></Route>
-          </Routes> */}
-      {/* </div> */}
-      {/* </Router> */} */
+      <ProfileForm />
     </div>
   );
 }

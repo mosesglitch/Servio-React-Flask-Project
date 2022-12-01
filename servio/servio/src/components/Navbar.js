@@ -12,7 +12,7 @@ import List from "./List";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
-// import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 function MyNavbar() {
   const [profiles, setdata] = useState([
@@ -41,17 +41,17 @@ function MyNavbar() {
     });
   }, []);
   return (
-    <Navbar bg="light" expand="lg">
-      <Container fluid>
-        <Navbar.Brand href="#">Servio</Navbar.Brand>
-        <Navbar.Toggle aria-controls="navbarScroll" />
-        <Navbar.Collapse id="navbarScroll">
-          <Nav
-            className="me-auto my-2 my-lg-0"
-            style={{ maxHeight: "100px" }}
-            navbarScroll
-          >
-            <Router>
+    <Router>
+      <Navbar bg="light" expand="lg">
+        <Container fluid>
+          <Navbar.Brand href="#">Servio</Navbar.Brand>
+          <Navbar.Toggle aria-controls="navbarScroll" />
+          <Navbar.Collapse id="navbarScroll">
+            <Nav
+              className="me-auto my-2 my-lg-0"
+              style={{ maxHeight: "100px" }}
+              navbarScroll
+            >
               <Nav.Link href="#action1">
                 <Link to="/profile">Profile</Link>
               </Nav.Link>
@@ -72,33 +72,29 @@ function MyNavbar() {
               <Nav.Link href="#" disabled>
                 Link
               </Nav.Link>
-              <Routes>
-                {/* <Route exact path="/" element={<Home />}></Route> */}
-                <Route
-                  exact
-                  path="/profile"
-                  element={<ProfilePage data={profiles} />}
-                ></Route>
-                <Route
-                  exact
-                  path="/list"
-                  element={<List data={profiles} />}
-                ></Route>
-              </Routes>
-            </Router>
-          </Nav>
-          <Form className="d-flex">
-            <Form.Control
-              type="search"
-              placeholder="Search"
-              className="me-2"
-              aria-label="Search"
-            />
-            <Button variant="outline-success">Search</Button>
-          </Form>
-        </Navbar.Collapse>
-      </Container>
-    </Navbar>
+            </Nav>
+            <Form className="d-flex">
+              <Form.Control
+                type="search"
+                placeholder="Search"
+                className="me-2"
+                aria-label="Search"
+              />
+              <Button variant="outline-success">Search</Button>
+            </Form>
+          </Navbar.Collapse>
+        </Container>
+      </Navbar>
+      <Routes>
+        {/* <Route exact path="/" element={<Home />}></Route> */}
+        <Route
+          exact
+          path="/profile"
+          element={<ProfilePage data={profiles} />}
+        ></Route>
+        <Route exact path="/list" element={<List data={profiles} />}></Route>
+      </Routes>
+    </Router>
   );
 }
 
