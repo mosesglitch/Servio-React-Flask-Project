@@ -14,11 +14,38 @@ import {
   MDBTypography,
 } from "mdb-react-ui-kit";
 import ProfilePage from "./profile";
+
+// class List extends Component {
+//   constructor(props) {
+//     super(props);
+
+//   }
+//   render() {
+//     return (
+//       <div>
+
+//       </div>
+//     );
+//   }
+// }
+
+// export default List;
+
 const List = ({ data }) => {
   const [selectedSP, setSelectedSP] = useState("0");
-  console.log(selectedSP);
+  const [showProfile, setShowProfile] = useState(false);
+
+  console.log(showProfile, selectedSP);
   const SProvider = data.map((sp) => (
-    <MDBCol xl={6} className="mb-4" onClick={() => setSelectedSP(sp.id)}>
+    <MDBCol
+      xl={6}
+      className="mb-4"
+      key={sp.id}
+      onClick={() => {
+        setSelectedSP(sp.id);
+        setShowProfile(true);
+      }}
+    >
       <MDBCard>
         <MDBCardBody>
           <div className="d-flex justify-content-between align-items-center">
@@ -54,10 +81,18 @@ const List = ({ data }) => {
       </MDBCard>
     </MDBCol>
   ));
+  // const showWhat = showProfile ? (
+  //   <MDBRow>{SProvider}</MDBRow>
+  // ) : (
+  //   <ProfilePage selectedSP={4} />
+  // );
+
+  if (!showProfile) {
+    return <MDBRow>{SProvider}</MDBRow>;
+  }
   return (
     <>
-      <MDBRow>{SProvider}</MDBRow>
-      {/* <ProfilePage selectedSP={selectedSP} /> */}
+      <ProfilePage selectedSP={4} />
     </>
   );
 };

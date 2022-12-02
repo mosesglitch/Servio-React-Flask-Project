@@ -10,7 +10,7 @@ from database.models import db_drop_and_create_all, setup_db, Service_info
 app = Flask(__name__)
 with app.app_context(): 
     setup_db(app)
-    db_drop_and_create_all()
+    # db_drop_and_create_all()
 
 # setup_db(app)
 
