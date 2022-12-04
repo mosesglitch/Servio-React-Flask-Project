@@ -26,6 +26,7 @@ class ProfileForm extends React.Component {
       about: "",
       skill: "",
       availability: "",
+      imageURL: "",
     };
   }
   changeName = (e) => {
@@ -43,6 +44,15 @@ class ProfileForm extends React.Component {
   changeAvailability = (e) => {
     this.setState({ availability: e.target.value });
   };
+  handleUploadImage = (e) => {
+    e.preventDefault();
+
+    const data = new FormData();
+    data.append("file", this.uploadInput.files[0]);
+    data.append("filename", this.fileName.value);
+    console.log(data);
+  };
+
   postToDb = (e) => {
     e.preventDefault();
     $.ajax({

@@ -32,8 +32,10 @@ import ProfilePage from "./profile";
 // export default List;
 
 const List = ({ data }) => {
-  const [selectedSP, setSelectedSP] = useState("0");
+  const [selectedSP, setSelectedSP] = useState(0);
   const [showProfile, setShowProfile] = useState(false);
+
+  const theeSelected = data[selectedSP - 1];
 
   console.log(showProfile, selectedSP);
   const SProvider = data.map((sp) => (
@@ -92,7 +94,7 @@ const List = ({ data }) => {
   }
   return (
     <>
-      <ProfilePage selectedSP={4} />
+      <ProfilePage theeSelected={theeSelected} />
     </>
   );
 };

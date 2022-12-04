@@ -54,7 +54,7 @@ def db_drop_and_create_all():
 
     )
     masseuse = Service_info(
-        name   = 'Regina',
+        name   = 'Ganta',
         location = 'Westlands',
         about = 'Relax',
         skill = 'Masseuse',
@@ -84,6 +84,8 @@ class Service_info(db.Model):
     skill = Column(String(180),nullable=False)
 
     availability = Column(String(50),nullable=True)
+    
+    image=db.Column(db.LargeBinary)
     '''
     short()
         short form representation of the Drink model

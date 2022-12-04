@@ -8,6 +8,7 @@ import List from "./components/List";
 import ProfileForm from "./components/ProfileForm";
 import MyNavbar from "./components/Navbar";
 import profilePage from "./components/profile";
+import Imageupload from "./components/Imageupload";
 
 function App() {
   // useEffect(() => {
@@ -30,7 +31,7 @@ function App() {
   return (
     <div>
       <MyNavbar />
-      <ProfileForm />
+      <Imageupload />
     </div>
   );
 }

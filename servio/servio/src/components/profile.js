@@ -12,10 +12,8 @@ import {
   MDBIcon,
 } from "mdb-react-ui-kit";
 
-export default function ProfilePage({ data, selectedSP }) {
-  const selectedServiceP = parseInt(selectedSP);
-  console.log("serv", typeof selectedServiceP);
-  console.log("sp", typeof selectedSP);
+export default function ProfilePage({ theeSelected }) {
+  console.log(theeSelected);
   return (
     <div className="gradient-custom-2" style={{ backgroundColor: "#9de2ff" }}>
       <MDBContainer className="py-5 h-100">
@@ -41,15 +39,14 @@ export default function ProfilePage({ data, selectedSP }) {
                     outline
                     color="dark"
                     style={{ height: "36px", overflow: "visible" }}
+                    // onClick={() => {}}
                   >
                     Edit profile
                   </MDBBtn>
                 </div>
                 <div className="ms-3" style={{ marginTop: "130px" }}>
-                  <MDBTypography tag="h5">
-                    {data[selectedServiceP].name}
-                  </MDBTypography>
-                  <MDBCardText>{data[selectedServiceP].location}</MDBCardText>
+                  <MDBTypography tag="h5">{theeSelected.name}</MDBTypography>
+                  <MDBCardText>{theeSelected.location}</MDBCardText>
                 </div>
               </div>
               <div
@@ -104,7 +101,7 @@ export default function ProfilePage({ data, selectedSP }) {
                   <p className="lead fw-normal mb-1">About</p>
                   <div className="p-4" style={{ backgroundColor: "#f8f9fa" }}>
                     <MDBCardText className="font-italic mb-1">
-                      {data[selectedServiceP].skill}
+                      {theeSelected.skill}
                     </MDBCardText>
                     <MDBCardText className="font-italic mb-1">
                       Lives in New York

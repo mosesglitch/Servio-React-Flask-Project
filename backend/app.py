@@ -1,21 +1,28 @@
 import os
-from flask import Flask, request, jsonify, abort, redirect
+from flask import Flask, request, jsonify, abort, redirect, flash, session
 from sqlalchemy import exc
 import json
-from flask_cors import CORS
+from werkzeug.utils import secure_filename
+from flask_cors import CORS, cross_origin
 import ast
 from database.models import db_drop_and_create_all, setup_db, Service_info
 # from .auth.auth import AuthError, requires_auth
+import logging
+
+logging.basicConfig(level=logging.INFO)
+
+logger = logging.getLogger('HELLO WORLD')
 
 app = Flask(__name__)
 with app.app_context(): 
     setup_db(app)
-    # db_drop_and_create_all()
+    db_drop_and_create_all()
 
 # setup_db(app)
+CORS(app)
 
-
-
+UPLOAD_FOLDER = os.getcwd()
+ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
 
 @app.route('/profile',methods = ["GET"])
 def get_time():
@@ -56,7 +63,27 @@ def add_profile():
         return jsonify({"success": True}),200
     except:
         abort(422) 
-      
+
+@app.route('/uploadimage',methods=['PATCH'])
+# @requires_auth('post:drinks')
+def upload_image():
+    # try:
+    logger.info("welcome to upload`")
+    file = request.files['file'] 
+    userid=request.form["user_id"]
+    print('userid',(userid))
+    filesys=file.read()
+    updprofile = Service_info.query.filter_by(id=2).first()
+    updprofile.image = filesys
+    print(file)
+    updprofile.update()
+    response="Whatever you wish too return"
+    return jsonify(response)
+    
+        # return jsonify({"success": True}),200
+    # except Exception as e:
+    #     print(e)
+    #     abort(422) 
 # Running app
 if __name__ == '__main__':
     app.run(debug=True)

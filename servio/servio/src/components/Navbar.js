@@ -32,6 +32,7 @@ function MyNavbar() {
       dataType: "json",
       success: (result) => {
         setdata(result.service);
+        console.log(profiles);
         return;
       },
       error: (error) => {
@@ -53,7 +54,7 @@ function MyNavbar() {
               navbarScroll
             >
               <Nav.Link href="#action1">
-                <Link to="/profile">Profile</Link>
+                <Link to="/profileform">Register</Link>
               </Nav.Link>
               <Nav.Link href="#action2">
                 <Link to="/list">List</Link>
@@ -87,11 +88,7 @@ function MyNavbar() {
       </Navbar>
       <Routes>
         {/* <Route exact path="/" element={<Home />}></Route> */}
-        <Route
-          exact
-          path="/profile"
-          element={<ProfilePage data={profiles} />}
-        ></Route>
+        <Route exact path="/profileform" element={<ProfileForm />}></Route>
         <Route exact path="/list" element={<List data={profiles} />}></Route>
       </Routes>
     </Router>
