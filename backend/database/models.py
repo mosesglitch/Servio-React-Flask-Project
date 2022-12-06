@@ -1,4 +1,5 @@
 import os
+from io import BytesIO
 from sqlalchemy import Column, String, Integer
 from flask_sqlalchemy import SQLAlchemy
 import json
@@ -85,7 +86,15 @@ class Service_info(db.Model):
 
     availability = Column(String(50),nullable=True)
     
-    image=db.Column(db.LargeBinary)
+    image_link= Column(String(100),nullable=True)
+
+    email= Column(String(100),nullable=True)
+
+    phone= Column(Integer)
+
+    facebook = Column(String(50))
+
+    twitter = Column(String(50))
     '''
     short()
         short form representation of the Drink model
@@ -114,7 +123,12 @@ class Service_info(db.Model):
             'location': self.location,
             "about":self.location,
             "skill":self.skill,
-            'availability':self.availability
+            'availability':self.availability,
+            "image_link":self.image_link,
+            "email":self.email,
+            "phone":self.phone,
+            "facebook":self.facebook,
+            "twitter":self.twitter
             # 'recipe': json.loads(self.recipe)
         }
 

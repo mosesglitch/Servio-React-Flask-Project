@@ -23,6 +23,7 @@ function MyNavbar() {
       about: "Way Down,We go",
       skill: "Masseuse",
       availability: "Available",
+      image: "image",
     },
   ]);
   useEffect(() => {
@@ -32,7 +33,6 @@ function MyNavbar() {
       dataType: "json",
       success: (result) => {
         setdata(result.service);
-        console.log(profiles);
         return;
       },
       error: (error) => {

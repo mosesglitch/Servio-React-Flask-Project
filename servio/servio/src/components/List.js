@@ -37,7 +37,6 @@ const List = ({ data }) => {
 
   const theeSelected = data[selectedSP - 1];
 
-  console.log(showProfile, selectedSP);
   const SProvider = data.map((sp) => (
     <MDBCol
       xl={6}

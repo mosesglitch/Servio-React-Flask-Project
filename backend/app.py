@@ -26,12 +26,12 @@ ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
 
 @app.route('/profile',methods = ["GET"])
 def get_time():
-    try:
-        serves = Service_info.query.order_by(Service_info.id).all()
-       
-        return jsonify({"success": True,"service": [serve.long() for serve in serves]})
-    except:
-        abort(422)
+    # try:
+    serves = Service_info.query.order_by(Service_info.id).all()
+    print(serves)
+    return jsonify({"success": True,"service": [serve.long() for serve in serves]})
+    # except:
+    #     abort(422)
     # data={
     #     'Name':["geek","guru",'gant'],
     #     "Age":["22",'45','34'],
@@ -48,18 +48,28 @@ def add_profile():
         about = body.get("about",None)
         skill = body.get("skill",None)
         availability = body.get("availability",None)
+        image_link=body.get("image_link",None)
+        email=body.get("email",None)
+        phone=body.get("phone",None)
+        facebook=body.get("facebook",None)
+        twitter=body.get("twitter",None)
+
         newprofile  =  Service_info(
         name = name,
         location=location,
         about=about,
         skill=skill,
-        availability=availability
+        availability=availability,
+        image_link=image_link,
+        email=email,
+        phone=phone,
+        facebook=facebook,
+        twitter=twitter
         # recipe = json.dumps(recipe)
         )
         newprofile.insert()
-        print(name, availability,skill)
         first = Service_info.query.first()
-        print(first)
+        print(twitter,facebook)
         return jsonify({"success": True}),200
     except:
         abort(422) 
@@ -68,14 +78,19 @@ def add_profile():
 # @requires_auth('post:drinks')
 def upload_image():
     # try:
+    target=os.path.join(UPLOAD_FOLDER,'test_docs')
+    if not os.path.isdir(target):
+        os.mkdir(target)
     logger.info("welcome to upload`")
     file = request.files['file'] 
     userid=request.form["user_id"]
-    print('userid',(userid))
-    filesys=file.read()
+    filename = secure_filename(file.filename)
+    destination="/".join([target, filename])
+    file.save(destination)
+    # session['uploadFilePath']=destination
+    # filesys=file.read()
     updprofile = Service_info.query.filter_by(id=2).first()
-    updprofile.image = filesys
-    print(file)
+    updprofile.image_link = destination
     updprofile.update()
     response="Whatever you wish too return"
     return jsonify(response)

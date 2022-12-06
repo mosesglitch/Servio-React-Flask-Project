@@ -26,7 +26,11 @@ class ProfileForm extends React.Component {
       about: "",
       skill: "",
       availability: "",
-      imageURL: "",
+      image_link: "",
+      email: "",
+      phone: "",
+      facebook: "",
+      twitter: "",
     };
   }
   changeName = (e) => {
@@ -66,6 +70,11 @@ class ProfileForm extends React.Component {
         about: this.state.about,
         skill: this.state.skill,
         availability: this.state.availability,
+        image_link: this.state.image_link,
+        email: this.state.email,
+        phone: this.state.phone,
+        facebook: this.state.facebook,
+        twitter: this.state.twitter,
       }),
       xhrFields: {
         withCredentials: true,
@@ -88,6 +97,7 @@ class ProfileForm extends React.Component {
         return;
       },
     });
+    console.log(this.state.facebook, this.state.twitter);
   };
 
   render() {
@@ -127,9 +137,7 @@ class ProfileForm extends React.Component {
                           id="form1"
                           type="text"
                         />
-                      </MDBCol>
 
-                      <MDBCol md="6">
                         <MDBInput
                           wrapperClass="mb-4"
                           label="Location"
@@ -139,23 +147,83 @@ class ProfileForm extends React.Component {
                           type="text"
                           // value={inputValue}
                         />
-                      </MDBCol>
-                      <MDBCol md="6">
+
                         <MDBInput
                           wrapperClass="mb-4"
                           label="About"
-                          onChange={this.changeAbout}
+                          onChange={(e) =>
+                            this.setState({ about: e.target.value })
+                          }
                           size="lg"
                           id="form2"
                           type="text"
                           // value={inputValue}
                         />
-                      </MDBCol>
-                      <MDBCol md="6">
+
                         <MDBInput
                           wrapperClass="mb-4"
                           label="Skill"
                           onChange={this.changeSkill}
+                          size="lg"
+                          id="form2"
+                          type="text"
+                          // value={inputValue}
+                        />
+
+                        <MDBInput
+                          wrapperClass="mb-4"
+                          label="Availability"
+                          onChange={(e) =>
+                            this.setState({ availability: e.target.value })
+                          }
+                          size="lg"
+                          id="form2"
+                          type="text"
+                          // value={inputValue}
+                        />
+
+                        <MDBInput
+                          wrapperClass="mb-4"
+                          label="Email"
+                          onChange={(e) =>
+                            this.setState({ Email: e.target.value })
+                          }
+                          size="lg"
+                          id="form2"
+                          type="text"
+                          // value={inputValue}
+                        />
+
+                        <MDBInput
+                          wrapperClass="mb-4"
+                          label="Phone"
+                          onChange={(e) =>
+                            this.setState({ phone: e.target.value })
+                          }
+                          size="lg"
+                          id="form2"
+                          type="text"
+                          // value={inputValue}
+                        />
+
+                        <MDBInput
+                          wrapperClass="mb-4"
+                          label="Facebook"
+                          onChange={(e) =>
+                            this.setState({ facebook: e.target.value })
+                          }
+                          size="lg"
+                          id="form2"
+                          type="text"
+                          // value={inputValue}
+                        />
+
+                        <MDBInput
+                          wrapperClass="mb-4"
+                          label="Twitter"
+                          onChange={(e) =>
+                            this.setState({ twitter: e.target.value })
+                          }
                           size="lg"
                           id="form2"
                           type="text"
@@ -177,7 +245,7 @@ class ProfileForm extends React.Component {
                     <MDBInput
                       wrapperClass="mb-4"
                       label="Availability"
-                      onChange={this.changeAvailability}
+                      onChange={(e) => this.setState({ about: e.target.value })}
                       size="lg"
                       id="form3"
                       type="text"

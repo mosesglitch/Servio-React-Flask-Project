@@ -13,7 +13,7 @@ import {
 } from "mdb-react-ui-kit";
 
 export default function ProfilePage({ theeSelected }) {
-  console.log(theeSelected);
+  console.log(theeSelected.image_link);
   return (
     <div className="gradient-custom-2" style={{ backgroundColor: "#9de2ff" }}>
       <MDBContainer className="py-5 h-100">
@@ -29,7 +29,7 @@ export default function ProfilePage({ theeSelected }) {
                   style={{ width: "150px" }}
                 >
                   <MDBCardImage
-                    src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-profiles/avatar-1.webp"
+                    src={theeSelected.image_link}
                     alt="Generic placeholder image"
                     className="mt-4 mb-2 img-thumbnail"
                     fluid
@@ -39,7 +39,6 @@ export default function ProfilePage({ theeSelected }) {
                     outline
                     color="dark"
                     style={{ height: "36px", overflow: "visible" }}
-                    // onClick={() => {}}
                   >
                     Edit profile
                   </MDBBtn>
