@@ -17,8 +17,7 @@ class Imageupload extends React.Component {
     const data = new FormData();
     data.append("file", this.uploadInput.files[0]);
     data.append("filename", this.fileName.value);
-    data.append("user_id", 3);
-    console.log(data);
+    data.append("user_id", this.props.profileId);
     fetch("http://127.0.0.1:5000/uploadimage", {
       method: "PATCH",
       body: data,
@@ -27,6 +26,7 @@ class Imageupload extends React.Component {
         console.log(body.file);
       });
     });
+    this.props.backtoprof();
   }
 
   render() {
@@ -51,9 +51,9 @@ class Imageupload extends React.Component {
         </div>
         <br />
         <div>
-          <button>Upload</button>
+          <button onClick={this.handleUploadImage}>Upload</button>
         </div>
-        <img src={this.state.imageURL} alt="img" />
+        {/* <img src={this.state.imageURL} alt="img" /> */}
       </form>
     );
   }

@@ -89,7 +89,7 @@ def upload_image():
     file.save(destination)
     # session['uploadFilePath']=destination
     # filesys=file.read()
-    updprofile = Service_info.query.filter_by(id=2).first()
+    updprofile = Service_info.query.filter_by(id=userid).first()
     updprofile.image_link = destination
     updprofile.update()
     response="Whatever you wish too return"

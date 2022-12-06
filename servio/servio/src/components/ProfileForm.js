@@ -9,7 +9,7 @@ import {
   MDBTextArea,
   MDBInput,
   MDBCard,
-  // MDBSelect,
+  MDBSelect,
   MDBCardText,
   MDBCardBody,
   MDBCheckbox,
@@ -254,15 +254,15 @@ class ProfileForm extends React.Component {
                     <MDBRow>
                       <MDBCol md="6">
                         {/* <MDBSelect
-                        className="mb-4"
-                        size="lg"
-                        data={[
-                          { text: "Employees", value: 1 },
-                          { text: "Two", value: 2 },
-                          { text: "Three", value: 3 },
-                          { text: "Four", value: 4 },
-                        ]}
-                      /> */}
+                          className="mb-4"
+                          size="lg"
+                          data={[
+                            { text: "Employees", value: 1 },
+                            { text: "Two", value: 2 },
+                            { text: "Three", value: 3 },
+                            { text: "Four", value: 4 },
+                          ]}
+                        /> */}
                       </MDBCol>
                     </MDBRow>
                   </MDBCol>

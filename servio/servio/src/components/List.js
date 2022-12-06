@@ -38,17 +38,14 @@ const List = ({ data }) => {
   const theeSelected = data[selectedSP - 1];
 
   const SProvider = data.map((sp) => (
-    <MDBCol
-      xl={6}
-      className="mb-4"
-      key={sp.id}
-      onClick={() => {
-        setSelectedSP(sp.id);
-        setShowProfile(true);
-      }}
-    >
+    <MDBCol xl={6} className="mb-4" key={sp.id}>
       <MDBCard>
-        <MDBCardBody>
+        <MDBCardBody
+          onClick={() => {
+            setSelectedSP(sp.id);
+            setShowProfile(true);
+          }}
+        >
           <div className="d-flex justify-content-between align-items-center">
             <div className="d-flex align-items-center">
               <img
@@ -59,7 +56,7 @@ const List = ({ data }) => {
               />
               <div className="ms-3">
                 <p className="fw-bold mb-1">{sp.name}</p>
-                <p className="text-muted mb-0">john.doe@gmail.com</p>
+                <p className="text-muted mb-0">{sp.email}</p>
               </div>
             </div>
             <MDBBadge pill color="success" light>
@@ -72,10 +69,22 @@ const List = ({ data }) => {
           border="0"
           className="p-2 d-flex justify-content-around"
         >
-          <MDBBtn color="link" rippleColor="primary" className="text-reset m-0">
+          <MDBBtn
+            color="link"
+            rippleColor="primary"
+            className="text-reset m-0"
+            a
+            href="sms:+255753782444"
+          >
             Message <MDBIcon fas icon="envelope" />
           </MDBBtn>
-          <MDBBtn color="link" rippleColor="primary" className="text-reset m-0">
+          <MDBBtn
+            color="link"
+            rippleColor="primary"
+            className="text-reset m-0"
+            a
+            href="tel:+255753782444"
+          >
             Call <MDBIcon fas icon="phone" />
           </MDBBtn>
         </MDBCardFooter>
