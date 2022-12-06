@@ -1,7 +1,7 @@
 import React from "react";
-import Dropdown from "react-dropdown";
+import Dropdown from "./Dropdown";
 import $ from "jquery";
-import "react-dropdown/style.css";
+
 import {
   MDBCol,
   MDBContainer,
@@ -16,15 +16,178 @@ import {
   MDBBtn,
   MDBTypography,
 } from "mdb-react-ui-kit";
+const options = [
+  {
+    label: "Masseuse",
+    value: "Masseuse",
+  },
+  {
+    label: "Hairdresser",
+    value: "Hairdresser",
+  },
+  {
+    label: "Manicure",
+    value: "Manicure",
+  },
+  {
+    label: "Facial",
+    value: "Facial",
+  },
+];
+
+const nairobi = [
+  {
+    label: "Dagoretti North",
+    value: ["Kilimani", "Kawangware", "Gatina", "Kileleshwa", "Kabiro"],
+  },
+  {
+    label: "Dagoretti South",
+    value: ["Mutu-ini", "Ng'ando", "Riruta", "Uthiru/Ruthimitu", "Waithaka"],
+  },
+  {
+    label: "Langata",
+    value: [
+      "Karen",
+      "Nairobi West",
+      "Mugumo-ini",
+      "South C",
+      "Nyayo Highrise",
+      "Otiende ",
+    ],
+  },
+  {
+    label: "Kibra",
+    value: [
+      "Laini Saba",
+      "Lindi",
+      "Makina",
+      "Woodley/ Kenyatta Golf Course",
+      "Sarang'ombe",
+    ],
+  },
+  {
+    label: "Kasarani",
+    value: ["Clay City", "Mwiki", "Kasarani", "Njiru", "Ruai ", "Kamulu"],
+  },
+  {
+    label: "Roysambu",
+    value: [
+      "Roysambu",
+      "Garden Estate",
+      "Ridgeways",
+      "Githurai",
+      "Kahawa West",
+      "Zimmermann",
+      "Kahawa",
+    ],
+  },
+  {
+    label: "Ruaraka",
+    value: ["Babadogo", "Utalii", "Mathare North", "Lucky Summer", "Korogocho"],
+  },
+  {
+    label: "Embakasi Central",
+    value: [
+      "Kayole North",
+      "Kayole North Central",
+      "Kayole South",
+      "Komarock",
+      "Matopeni/ Spring Valley",
+    ],
+  },
+  {
+    label: "Embakasi East",
+    value: [
+      "Upper Savanna",
+      "Lower Savanna",
+      "Embakasi",
+      "Utawala",
+      "Mihang'o",
+    ],
+  },
+  {
+    label: "Embakasi North",
+    value: [
+      "Kariobangi North",
+      "Dandora Area I",
+      "Dandora Area II",
+      "Dandora Area III",
+      "Dandora Area IV",
+    ],
+  },
+  {
+    label: "Embakasi South",
+    value: ["Imara Daima", "Kwa Njenga", "Kwa Reuben", "Pipeline", "Kware"],
+  },
+  {
+    label: "Embakasi West",
+    value: ["Umoja I", "Umoja II", "Mowlem", "Kariobangi South"],
+  },
+  {
+    label: "Kamukunji",
+    value: [
+      "Pumwani",
+      "Eastleigh North",
+      "Eastleigh South",
+      "Airbase",
+      "California",
+    ],
+  },
+  {
+    label: "Makadara",
+    value: [
+      "Maringo/ Hamza",
+      "Viwandani",
+      "Harambee",
+      "Makongeni",
+      "Mbotela ",
+      "Bahati",
+    ],
+  },
+  {
+    label: "Mathare",
+    value: [
+      "Hospital",
+      "Mabatini",
+      "Huruma",
+      "Ngei",
+      "Mlango Kubwa",
+      "Kiamaiko",
+    ],
+  },
+  {
+    label: "Starehe",
+    value: [
+      "Nairobi Central",
+      "Ngara",
+      "Pangani",
+      "Ziwani/ Kariokor",
+      "Landimawe",
+      "Nairobi South",
+    ],
+  },
+  {
+    label: "Westlands",
+    value: [
+      "Kitisuru",
+      "Parklands/Highridge",
+      "Karura",
+      "Kangemi",
+      "Mountain View",
+    ],
+  },
+];
 
 class ProfileForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       name: "",
-      location: "",
+      location: nairobi[0],
+      locationd: nairobi[0],
       about: "",
-      skill: "",
+      skill: options[0],
+      skilld: options[0],
       availability: "",
       image_link: "",
       email: "",
@@ -33,18 +196,17 @@ class ProfileForm extends React.Component {
       twitter: "",
     };
   }
+
   changeName = (e) => {
     this.setState({ name: e.target.value });
   };
-  changeLocation = (e) => {
-    this.setState({ location: e.target.value });
-  };
+
   changeAbout = (e) => {
     this.setState({ about: e.target.value });
   };
-  changeSkill = (e) => {
-    this.setState({ skill: e.target.value });
-  };
+  // changeSkill = (e) => {
+  //   this.setState({ skill: e.target.value });
+  // };
   changeAvailability = (e) => {
     this.setState({ availability: e.target.value });
   };
@@ -56,8 +218,24 @@ class ProfileForm extends React.Component {
     data.append("filename", this.fileName.value);
     console.log(data);
   };
-
+  changeLocation = (selectedLocation) => {
+    this.setState({ location: selectedLocation });
+    this.setState({ locationd: selectedLocation.label });
+  };
+  handleSkillSelect = (selectedSkill) => {
+    this.setState({ skill: selectedSkill });
+    this.setState({ skilld: selectedSkill.value });
+    console.log(selectedSkill.value);
+  };
   postToDb = (e) => {
+    const conkeys = [];
+    // for (let i = 0; i < nairobi.length; i++) {
+    //   conkeys.push(i.keys());
+    // }
+    Object.entries(nairobi).forEach(([key, value]) => {
+      console.log("keykey", key, "valuvalu", value);
+    });
+    console.log(conkeys);
     e.preventDefault();
     $.ajax({
       url: "/addprofile", //TODO: update request URL
@@ -66,9 +244,9 @@ class ProfileForm extends React.Component {
       contentType: "application/json",
       data: JSON.stringify({
         name: this.state.name,
-        location: this.state.location,
+        location: this.state.locationd,
         about: this.state.about,
-        skill: this.state.skill,
+        skill: this.state.skilld,
         availability: this.state.availability,
         image_link: this.state.image_link,
         email: this.state.email,
@@ -104,7 +282,10 @@ class ProfileForm extends React.Component {
     console.log(this.state.name);
     return (
       <MDBContainer fluid className="h-custom">
-        <MDBRow className="d-flex justify-content-center align-items-center h-100">
+        <MDBRow
+          className="d-flex justify-content-ce },
+  {nter align-items-center h-100"
+        >
           <MDBCol col="12" className="m-5">
             <MDBCard
               className="card-registration card-registration-2"
@@ -140,16 +321,6 @@ class ProfileForm extends React.Component {
 
                         <MDBInput
                           wrapperClass="mb-4"
-                          label="Location"
-                          onChange={this.changeLocation}
-                          size="lg"
-                          id="form2"
-                          type="text"
-                          // value={inputValue}
-                        />
-
-                        <MDBInput
-                          wrapperClass="mb-4"
                           label="About"
                           onChange={(e) =>
                             this.setState({ about: e.target.value })
@@ -159,17 +330,22 @@ class ProfileForm extends React.Component {
                           type="text"
                           // value={inputValue}
                         />
+                        <Dropdown
+                          label="Select your location"
+                          selected={this.state.location}
+                          onSelectedChange={this.changeLocation}
+                          options={nairobi}
+                        />
+                        <br />
 
-                        <MDBInput
-                          wrapperClass="mb-4"
-                          label="Skill"
-                          onChange={this.changeSkill}
-                          size="lg"
-                          id="form2"
-                          type="text"
-                          // value={inputValue}
+                        <Dropdown
+                          label="Select your skill"
+                          selected={this.state.skill}
+                          onSelectedChange={this.handleSkillSelect}
+                          options={options}
                         />
 
+                        <br />
                         <MDBInput
                           wrapperClass="mb-4"
                           label="Availability"
@@ -231,40 +407,6 @@ class ProfileForm extends React.Component {
                         />
                       </MDBCol>
                     </MDBRow>
-                    {/* 
-                  <MDBSelect
-                    className="mb-4"
-                    size="lg"
-                    data={[
-                      { text: "Position", value: 1 },
-                      { text: "Two", value: 2 },
-                      { text: "Three", value: 3 },
-                      { text: "Four", value: 4 },
-                    ]}
-                  /> */}
-                    <MDBInput
-                      wrapperClass="mb-4"
-                      label="Availability"
-                      onChange={(e) => this.setState({ about: e.target.value })}
-                      size="lg"
-                      id="form3"
-                      type="text"
-                    />
-
-                    <MDBRow>
-                      <MDBCol md="6">
-                        {/* <MDBSelect
-                          className="mb-4"
-                          size="lg"
-                          data={[
-                            { text: "Employees", value: 1 },
-                            { text: "Two", value: 2 },
-                            { text: "Three", value: 3 },
-                            { text: "Four", value: 4 },
-                          ]}
-                        /> */}
-                      </MDBCol>
-                    </MDBRow>
                   </MDBCol>
 
                   <MDBCol md="6" className="bg-indigo p-5">
@@ -274,88 +416,8 @@ class ProfileForm extends React.Component {
                     >
                       Contact Details
                     </h3>
-                    {/* <MDBInput
-                    wrapperClass="mb-4"
-                    labelClass="text-white"
-                    label="Street + Nr"
-                    size="lg"
-                    id="form5"
-                    type="text"
-                  /> */}
-                    {/* <MDBInput
-                    wrapperClass="mb-4"
-                    labelClass="text-white"
-                    label="Additional Information"
-                    size="lg"
-                    id="form6"
-                    type="text"
-                  /> */}
 
-                    <MDBRow>
-                      {/* <MDBCol md="5">
-                      <MDBInput
-                        wrapperClass="mb-4"
-                        labelClass="text-white"
-                        label="Zip Code"
-                        size="lg"
-                        id="form6"
-                        type="text"
-                      />
-                    </MDBCol> */}
-
-                      {/* <MDBCol md="7">
-                      <MDBInput
-                        wrapperClass="mb-4"
-                        labelClass="text-white"
-                        label="Place"
-                        size="lg"
-                        id="form7"
-                        type="text"
-                      />
-                    </MDBCol> */}
-                    </MDBRow>
-
-                    {/* <MDBInput
-                    wrapperClass="mb-4"
-                    labelClass="text-white"
-                    label="Country"
-                    size="lg"
-                    id="form8"
-                    type="text"
-                  /> */}
-
-                    {/* <MDBRow>
-                    <MDBCol md="5">
-                      <MDBInput
-                        wrapperClass="mb-4"
-                        labelClass="text-white"
-                        label="Code +"
-                        size="lg"
-                        id="form9"
-                        type="text"
-                      />
-                    </MDBCol>
-
-                    <MDBCol md="7">
-                      <MDBInput
-                        wrapperClass="mb-4"
-                        labelClass="text-white"
-                        label="Phone Number"
-                        size="lg"
-                        id="form10"
-                        type="text"
-                      />
-                    </MDBCol>
-                  </MDBRow> */}
-
-                    {/* <MDBInput
-                    wrapperClass="mb-4"
-                    labelClass="text-white"
-                    label="Your Email"
-                    size="lg"
-                    id="form8"
-                    type="email"
-                  /> */}
+                    <MDBRow></MDBRow>
 
                     <MDBCheckbox
                       name="flexCheck"

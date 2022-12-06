@@ -92,9 +92,9 @@ class Service_info(db.Model):
 
     phone= Column(Integer)
 
-    facebook = Column(String(50))
+    facebook = Column(String(50),nullable=True)
 
-    twitter = Column(String(50))
+    twitter = Column(String(50),nullable=True)
     '''
     short()
         short form representation of the Drink model

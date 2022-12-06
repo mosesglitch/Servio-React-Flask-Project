@@ -71,7 +71,8 @@ def add_profile():
         first = Service_info.query.first()
         print(twitter,facebook)
         return jsonify({"success": True}),200
-    except:
+    except Exception as e:
+        print(e)
         abort(422) 
 
 @app.route('/uploadimage',methods=['PATCH'])

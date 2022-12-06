@@ -43,11 +43,11 @@ export default function ProfilePage({ theeSelected }) {
                       fluid
                       style={{ width: "150px", zIndex: "1" }}
                     /> */}
-                    {/* <img
+                    <img
                       className="img-fluid"
                       src={require(theeSelected.image_link)}
                       alt="logo"
-                    /> */}
+                    />
                     <MDBBtn
                       outline
                       color="dark"
