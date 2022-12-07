@@ -1,0 +1,15 @@
+import os
+
+# print(os.getcwd())
+# print(os.path.abspath(os.curdir))
+# os.chdir("../servio")
+# print(os.path.abspath(os.curdir))
+# print(os.path.normpath(os.getcwd() + os.sep + os.pardir))
+# print(os.path.abspath(os.curdir))
+# pathd=os.path.normpath(os.getcwd() + os.sep + os.pardir)
+# print('APS',pathd)
+# print("realg",os.path.join(pathd,'/servio/servio/public/profpics'))
+# print(os.pardir)
+PARENT_DIRECTORY= os.path.normpath(os.getcwd() + os.sep + os.pardir)
+print(PARENT_DIRECTORY)
+print(os.path.join(PARENT_DIRECTORY,'servio','servio','public'))

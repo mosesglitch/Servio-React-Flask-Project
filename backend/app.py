@@ -21,7 +21,8 @@ with app.app_context():
 # setup_db(app)
 CORS(app)
 
-UPLOAD_FOLDER = os.getcwd()
+PARENT_DIRECTORY= os.path.normpath(os.getcwd() + os.sep + os.pardir)
+UPLOAD_FOLDER=os.path.join(PARENT_DIRECTORY,'/servio/servio/public/')
 ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
 
 @app.route('/profile',methods = ["GET"])
@@ -69,7 +70,6 @@ def add_profile():
         )
         newprofile.insert()
         first = Service_info.query.first()
-        print(twitter,facebook)
         return jsonify({"success": True}),200
     except Exception as e:
         print(e)
@@ -79,19 +79,21 @@ def add_profile():
 # @requires_auth('post:drinks')
 def upload_image():
     # try:
-    target=os.path.join(UPLOAD_FOLDER,'test_docs')
+    print(UPLOAD_FOLDER)
+    target=os.path.join(PARENT_DIRECTORY,'servio','servio','public','profile_pics')
     if not os.path.isdir(target):
         os.mkdir(target)
     logger.info("welcome to upload`")
     file = request.files['file'] 
     userid=request.form["user_id"]
+    print(UPLOAD_FOLDER)
     filename = secure_filename(file.filename)
     destination="/".join([target, filename])
     file.save(destination)
     # session['uploadFilePath']=destination
     # filesys=file.read()
     updprofile = Service_info.query.filter_by(id=userid).first()
-    updprofile.image_link = destination
+    updprofile.image_link = filename
     updprofile.update()
     response="Whatever you wish too return"
     return jsonify(response)
