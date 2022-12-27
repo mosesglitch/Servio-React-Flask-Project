@@ -4,7 +4,13 @@
   display: flex;
   column-gap: 10px;
 }
-
+.searchbar > * {
+  display: inline-flex;
+  align-items: center;
+  vertical-align: middle;
+  padding-left: 100px;
+  border: 50px;
+}
 .App > * {
   flex: 1;
 }

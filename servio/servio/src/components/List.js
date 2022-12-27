@@ -11,12 +11,15 @@ import {
   MDBBtn,
 } from "mdb-react-ui-kit";
 import ProfilePage from "./Profilepage";
+import Search from "./Search";
 import "./List.css";
 import "./styles.css";
 
 const List = () => {
   // const [selectedSP, setSelectedSP] = useState(0);
   const [showProfile, setShowProfile] = useState(false);
+  const [skill, setSkill] = useState("");
+  const [location, setLocation] = useState("");
 
   const [data, setdata] = useState([
     {
@@ -32,14 +35,29 @@ const List = () => {
   const [theeSelected, setTheSelecteddata] = useState({});
   const [totalServers, settotalServers] = useState(0);
   const [page, setPage] = useState(1);
+  const [searchList, setSearchList] = useState(false);
+  const getSearchInfo = (location, skill) => {
+    setLocation(location);
+    setSkill(skill);
+    console.log(location, skill, "pappito");
+  };
   useEffect(() => {
     getServices();
-  }, [page]);
+  }, [page, searchList, location, skill]);
   const getServices = () => {
     $.ajax({
-      url: `/profile?page=${page}`,
-      type: "GET",
+      url: !searchList ? `/profile` : `/profile/search`,
+      type: "POST",
       dataType: "json",
+      contentType: "application/json",
+      data: JSON.stringify({
+        location: location.label,
+        skill: skill.label,
+      }),
+      xhrFields: {
+        withCredentials: true,
+      },
+      crossDomain: true,
       success: (result) => {
         setdata(result.service);
         settotalServers(result.total_services);
@@ -51,6 +69,8 @@ const List = () => {
       },
     });
   };
+
+  console.log(searchList);
   const setSelectedSP = (selected) => {
     const filterById = (server) => {
       return server.id == selected;
@@ -88,6 +108,7 @@ const List = () => {
     }
     return pageNumbers;
   };
+
   const SProvider = data.map((sp) => (
     <MDBCol xl={6} className="mb-3" key={sp.id}>
       <MDBCard>
@@ -155,6 +176,7 @@ const List = () => {
   if (!showProfile) {
     return (
       <div className="app-list">
+        <Search setSearchList={setSearchList} getSearchInfo={getSearchInfo} />
         <MDBRow className="app-list">{SProvider}</MDBRow>
         <div className="pagination-menu">{createPagination()}</div>
       </div>

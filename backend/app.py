@@ -9,7 +9,7 @@ from database.models import db_drop_and_create_all, setup_db, Service_info
 # from .auth.auth import AuthError, requires_auth
 import logging
 
-logging.basicConfig(level=logging.INFO)
+# logging.basicConfig(level=logging.INFO)
 
 logger = logging.getLogger('HELLO WORLD')
 
@@ -36,7 +36,7 @@ def paginate_services(request,selection):
     current_questions=questions[start:end]
     return current_questions
 
-@app.route('/profile',methods = ["GET"])
+@app.route('/profile',methods = ["POST"])
 def get_services():
     # try:
     selection = Service_info.query.order_by(Service_info.id).all()
@@ -89,21 +89,31 @@ def add_profile():
     except Exception as e:
         print(e)
         abort(422) 
-    @app.route('/questions/search', methods=["POST"])
-    def search_skill():
+
+@app.route('/profile/search', methods=["POST"])
+def search_skill():
+    try:
         body = request.get_json()
-        search = body.get("searchTerm", None)
-        if search:
+        loc = body.get("location", None)
+        skills = body.get("skill",None)
+        print(loc)
+        print(skills)
+        if skills or loc:
             selection = Service_info.query.order_by(Service_info.id).filter(
-                Service_info.question.ilike('%{}%'.format(search))).all()
-            #current_questions = paginate_questions(request, selection)
-            return jsonify (
-                {
-                    "success": True,
-                    "questions": current_questions,
-                    "total_questions":len(selection),
-                }
-            )
+                Service_info.location.ilike('%{}%'.format(loc))).filter(
+                    Service_info.skill.ilike('%{}%'.format(skills))).all()
+            # selection = Service_info.query.order_by(Service_info.id).filter(and_(
+            #     Service_info.location.ilike('%{}%'.format(loc)),
+            #         Service_info.skill.ilike('%{}%'.format(skills)))).all()
+            current_servers = paginate_services(request, selection)
+            print(selection)
+            return jsonify({"success": True,
+                    "service": current_servers,
+                    "total_services": len(selection)})
+    except Exception as e:
+        print(e)
+        abort(422)
+
 @app.route('/uploadimage',methods=['PATCH'])
 # @requires_auth('post:drinks')
 def upload_image():

@@ -16,7 +16,6 @@ import Imageupload from "./Imageupload";
 export default function ProfilePage({ theeSelected }) {
   const [uploadPage, showUploadPage] = useState(false);
   const [profileId, setUserId] = useState(1);
-  console.log("monamo", theeSelected);
   const backToProfile = () => {
     showUploadPage(false);
   };
