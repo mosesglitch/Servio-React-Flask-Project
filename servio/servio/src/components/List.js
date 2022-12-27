@@ -1,44 +1,95 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import $ from "jquery";
 import {
   MDBCol,
-  MDBContainer,
   MDBRow,
   MDBCard,
   MDBIcon,
   MDBBadge,
   MDBCardFooter,
-  MDBCardText,
   MDBCardBody,
-  MDBCardImage,
   MDBBtn,
-  MDBTypography,
 } from "mdb-react-ui-kit";
-import ProfilePage from "./profile";
+import ProfilePage from "./Profilepage";
+import "./List.css";
+import "./styles.css";
 
-// class List extends Component {
-//   constructor(props) {
-//     super(props);
-
-//   }
-//   render() {
-//     return (
-//       <div>
-
-//       </div>
-//     );
-//   }
-// }
-
-// export default List;
-
-const List = ({ data }) => {
-  const [selectedSP, setSelectedSP] = useState(0);
+const List = () => {
+  // const [selectedSP, setSelectedSP] = useState(0);
   const [showProfile, setShowProfile] = useState(false);
 
-  const theeSelected = data[selectedSP - 1];
+  const [data, setdata] = useState([
+    {
+      id: "0",
+      name: "John Doe",
+      location: "Nairobi",
+      about: "Way Down,We go",
+      skill: "Masseuse",
+      availability: "Available",
+      image: "image",
+    },
+  ]);
+  const [theeSelected, setTheSelecteddata] = useState({});
+  const [totalServers, settotalServers] = useState(0);
+  const [page, setPage] = useState(1);
+  useEffect(() => {
+    getServices();
+  }, [page]);
+  const getServices = () => {
+    $.ajax({
+      url: `/profile?page=${page}`,
+      type: "GET",
+      dataType: "json",
+      success: (result) => {
+        setdata(result.service);
+        settotalServers(result.total_services);
+        return;
+      },
+      error: (error) => {
+        alert("Unable to load data. Please try your request again");
+        return;
+      },
+    });
+  };
+  const setSelectedSP = (selected) => {
+    const filterById = (server) => {
+      return server.id == selected;
+    };
+    const selectedSP = data.filter(filterById);
+    setTheSelecteddata(selectedSP[0]);
+    console.log(theeSelected);
+    return selectedSP;
+  };
+  // console.log("theesele", theeSelected);
+  // console.log("data", data);
+  // console.log("ssp", selectedSP);
+  const selectPage = (num) => {
+    setPage(num);
+    getServices();
+  };
 
+  const createPagination = () => {
+    let pageNumbers = [];
+    let maxPage = Math.ceil(totalServers / 2);
+    for (let i = 1; i <= maxPage; i++) {
+      pageNumbers.push(
+        <>
+          <span
+            key={i}
+            className={`page-num ${i === page ? "active" : ""}`}
+            onClick={() => {
+              selectPage(i);
+            }}
+          >
+            {i}
+          </span>
+        </>
+      );
+    }
+    return pageNumbers;
+  };
   const SProvider = data.map((sp) => (
-    <MDBCol xl={6} className="mb-4" key={sp.id}>
+    <MDBCol xl={6} className="mb-3" key={sp.id}>
       <MDBCard>
         <MDBCardBody
           onClick={() => {
@@ -49,7 +100,11 @@ const List = ({ data }) => {
           <div className="d-flex justify-content-between align-items-center">
             <div className="d-flex align-items-center">
               <img
-                src="https://mdbootstrap.com/img/new/avatars/8.jpg"
+                src={
+                  sp.image_link
+                    ? `profile_pics/${sp.image_link}`
+                    : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTPwial6oKnqe0VTFem0n2gERixQWcuxgzhdg&usqp=CAU}"
+                }
                 alt=""
                 style={{ width: "45px", height: "45px" }}
                 className="rounded-circle"
@@ -98,7 +153,12 @@ const List = ({ data }) => {
   // );
 
   if (!showProfile) {
-    return <MDBRow>{SProvider}</MDBRow>;
+    return (
+      <div className="app-list">
+        <MDBRow className="app-list">{SProvider}</MDBRow>
+        <div className="pagination-menu">{createPagination()}</div>
+      </div>
+    );
   }
   return (
     <>
