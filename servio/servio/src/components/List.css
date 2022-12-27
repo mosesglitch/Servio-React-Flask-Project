@@ -1,0 +1,23 @@
+/* .pagination-menu {
+  background-color: blueviolet;
+} */
+span.page-num {
+  margin: 5px;
+  padding-bottom: 0px;
+  /* color: blue; */
+  font-weight: bolder;
+  text-decoration: underline;
+  font-size: 16px;
+}
+
+span.page-num.active {
+  color: blue;
+  border-radius: 5px;
+  background-color: blueviolet;
+}
+.app-list {
+  background-image: linear-gradient(
+    rgba(255, 220, 255, 0.5),
+    rgba(255, 255, 255, 0.5)
+  );
+}
