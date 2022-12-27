@@ -4,6 +4,16 @@
   display: flex;
   column-gap: 10px;
 }
+.appheader {
+  color: aliceblue !important;
+  font-family: cursive;
+  font-size: large;
+  font-weight: bold;
+}
+.imglogo {
+  width: 50px;
+  height: 50px;
+}
 .searchbar > * {
   display: inline-flex;
   align-items: center;
@@ -11,12 +21,18 @@
   padding-left: 100px;
   border: 50px;
 }
+.navbar {
+  background-image: linear-gradient(
+    rgba(255, 220, 255, 0.5),
+    rgba(255, 255, 255, 0.5)
+  ) !important;
+}
 .App > * {
   flex: 1;
 }
-* {
+/* * {
   background-image: linear-gradient(
     rgba(255, 220, 255, 0.5),
     rgba(255, 255, 255, 0.5)
   );
-}
+} */

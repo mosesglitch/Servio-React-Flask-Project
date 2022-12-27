@@ -4,15 +4,18 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import ProfileForm from "./ProfileForm";
 import Container from "react-bootstrap/Container";
-
+import "./styles.css";
 import List from "./List";
 
 function MyNavbar() {
   return (
     <Router>
-      <Navbar bg="light" expand="lg">
+      <Navbar className="navbar" bg="dark" expand="lg">
         <Container fluid>
-          <Navbar.Brand href="#">Servio</Navbar.Brand>
+          <Navbar.Brand href="#" className="appheader">
+            <img className="imglogo" src={"profile_pics/servioicon.jpeg"} />
+            <b>Servio</b>
+          </Navbar.Brand>
           <Navbar.Toggle aria-controls="navbarScroll" />
           <Navbar.Collapse id="navbarScroll">
             <Nav
