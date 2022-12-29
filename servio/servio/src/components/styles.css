@@ -4,6 +4,22 @@
   display: flex;
   column-gap: 10px;
 }
+.text-black > p {
+  font-size: large;
+}
+/* .bd-highlight > * {
+  background-color: yellow;
+} */
+.appheader {
+  color: aliceblue !important;
+  font-family: cursive;
+  font-size: large;
+  font-weight: bold;
+}
+.imglogo {
+  width: 50px;
+  height: 50px;
+}
 .searchbar > * {
   display: inline-flex;
   align-items: center;
@@ -11,12 +27,24 @@
   padding-left: 100px;
   border: 50px;
 }
+.rounded-top {
+  padding-top: 20px;
+  border-top: 100px;
+}
+.img-thumbnail {
+  border-radius: 30px;
+  background-color: black;
+  padding-top: 0px;
+}
+.gradient-custom-2 .rounded-top {
+  background-image: linear-gradient(#dcdcdc, black) !important;
+}
 .App > * {
   flex: 1;
 }
-* {
+/* * {
   background-image: linear-gradient(
     rgba(255, 220, 255, 0.5),
     rgba(255, 255, 255, 0.5)
   );
-}
+} */

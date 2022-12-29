@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   MDBCol,
   MDBContainer,
@@ -10,8 +10,10 @@ import {
   MDBBtn,
   MDBTypography,
   MDBIcon,
+  MDBTextArea,
 } from "mdb-react-ui-kit";
 import Imageupload from "./Imageupload";
+import "./styles.css";
 
 export default function ProfilePage({ theeSelected }) {
   const [uploadPage, showUploadPage] = useState(false);
@@ -19,20 +21,25 @@ export default function ProfilePage({ theeSelected }) {
   const backToProfile = () => {
     showUploadPage(false);
   };
+  useEffect(() => {
+    setUserId(theeSelected.id);
+  }, []);
+
+  // console.log(theeSelected.id);
   // setUserId(theeSelected.id);
   if (!uploadPage)
     return (
-      <div className="gradient-custom-2" style={{ backgroundColor: "#9de2ff" }}>
+      <div className="gradient-custom-2" style={{ backgroundColor: "#E6E6FA" }}>
         <MDBContainer className="py-5 h-100">
           <MDBRow className="justify-content-center align-items-center h-100">
             <MDBCol lg="9" xl="7">
               <MDBCard>
                 <div
                   className="rounded-top text-white d-flex flex-row"
-                  style={{ backgroundColor: "#000", height: "200px" }}
+                  style={{ height: "200px" }}
                 >
                   <div
-                    className="ms-4 mt-5 d-flex flex-column"
+                    className="ms-4 mt- d-flex flex-column"
                     style={{ width: "150px" }}
                   >
                     <MDBCardImage
@@ -44,10 +51,10 @@ export default function ProfilePage({ theeSelected }) {
                       alt="Generic placeholder image"
                       className="mt-4 mb-2 img-thumbnail"
                       fluid
-                      style={{ width: "150px", zIndex: "1" }}
+                      style={{ width: "200px", height: "200px", zIndex: "1" }}
                     />
 
-                    <MDBBtn
+                    {/* <MDBBtn
                       outline
                       color="dark"
                       style={{ height: "36px", overflow: "visible" }}
@@ -56,42 +63,106 @@ export default function ProfilePage({ theeSelected }) {
                       }}
                     >
                       Edit profile
-                    </MDBBtn>
+                    </MDBBtn> */}
                   </div>
-                  <div className="ms-3" style={{ marginTop: "130px" }}>
-                    <MDBTypography tag="h5">{theeSelected.name}</MDBTypography>
-                    <MDBCardText>{theeSelected.location}</MDBCardText>
+                  <div className="ms-5" style={{ marginTop: "130px" }}>
+                    <MDBTypography
+                      tag="h5"
+                      style={{ fontSize: "35px", fontFamily: "cursive" }}
+                    >
+                      {theeSelected.name}
+                    </MDBTypography>
+                    <MDBCardText style={{ fontFamily: "fantasy" }}>
+                      {theeSelected.location}
+                    </MDBCardText>
                   </div>
                 </div>
                 <div
-                  className="p-4 text-black"
-                  style={{ backgroundColor: "#f8f9fa" }}
+                  className="pt-5 mt-3 pl-3 text-black "
+                  style={{
+                    backgroundColor: "white",
+                    paddingTop: "250px",
+                  }}
                 >
-                  <div className="d-flex justify-content-end text-center py-1">
-                    <MDBBtn outline floating>
-                      <MDBIcon fab icon="facebook" size="lg" />
+                  <p>
+                    <MDBIcon fas icon="briefcase" className="pr-2" />
+                    Chef
+                  </p>
+                  <p>
+                    <MDBIcon fas icon="clock" className="pr-2" />
+                    24hrs
+                  </p>
+                  <p>
+                    <MDBIcon fas icon="map-marker-alt" className="pr-2" />
+                    Mwanza
+                  </p>
+                  <div
+                    className="d-flex bd-highlight mb-0 mt-10 "
+                    style={{ paddingTop: "0px", paddingLeft: "0px" }}
+                  >
+                    <MDBBtn
+                      className="md-auto p-2 bd-highlight"
+                      style={{ backgroundColor: "black", width: "100px" }}
+                      href="#"
+                    >
+                      <MDBCardText>Call</MDBCardText>
                     </MDBBtn>
-                    <MDBBtn outline floating className="mx-1">
-                      <MDBIcon fab icon="twitter" size="lg" />
+                    <MDBBtn
+                      className="me-auto p-2 bd-highlight"
+                      style={{ backgroundColor: "black", width: "100px" }}
+                      href="#"
+                    >
+                      <MDBCardText>SMS</MDBCardText>
                     </MDBBtn>
 
-                    <MDBBtn outline floating>
-                      <MDBIcon fab icon="skype" size="lg" />
+                    <MDBBtn
+                      className="m-1"
+                      style={{ backgroundColor: "#3b5998" }}
+                      href="#"
+                    >
+                      <MDBIcon fab icon="facebook-f" />
+                    </MDBBtn>
+
+                    <MDBBtn
+                      className="m-1"
+                      style={{ backgroundColor: "#55acee" }}
+                      href="#"
+                    >
+                      <MDBIcon fab icon="twitter" />
+                    </MDBBtn>
+
+                    <MDBBtn
+                      className="m-1"
+                      style={{ backgroundColor: "#dd4b39" }}
+                      href="#"
+                    >
+                      <MDBIcon fab icon="google" />
+                    </MDBBtn>
+
+                    <MDBBtn
+                      className="m-1"
+                      style={{ backgroundColor: "#ac2bac" }}
+                      href="#"
+                    >
+                      <MDBIcon fab icon="instagram" />
+                    </MDBBtn>
+
+                    <MDBBtn
+                      className="m-1"
+                      style={{ backgroundColor: "#0082ca" }}
+                      href="#"
+                    >
+                      <MDBIcon fab icon="linkedin-in" />
                     </MDBBtn>
                   </div>
                 </div>
+
                 <MDBCardBody className="text-black p-4">
                   <div className="mb-5">
                     <p className="lead fw-normal mb-1">About</p>
                     <div className="p-4" style={{ backgroundColor: "#f8f9fa" }}>
                       <MDBCardText className="font-italic mb-1">
                         {theeSelected.skill}
-                      </MDBCardText>
-                      <MDBCardText className="font-italic mb-1">
-                        Lives in New York
-                      </MDBCardText>
-                      <MDBCardText className="font-italic mb-0">
-                        Photographer
                       </MDBCardText>
                     </div>
                   </div>
