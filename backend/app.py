@@ -98,18 +98,28 @@ def search_skill():
         skills = body.get("skill",None)
         print(loc)
         print(skills)
-        if skills or loc:
+        selection = Service_info.query.order_by(Service_info.id).all()
+       
+        if skills and loc:
             selection = Service_info.query.order_by(Service_info.id).filter(
                 Service_info.location.ilike('%{}%'.format(loc))).filter(
                     Service_info.skill.ilike('%{}%'.format(skills))).all()
+        elif skills:
+            selection = Service_info.query.order_by(Service_info.id).filter(
+                Service_info.skill.ilike('%{}%'.format(skills))).all()
+        elif loc:
+            selection = Service_info.query.order_by(Service_info.id).filter(
+                Service_info.location.ilike('%{}%'.format(loc))).all()
+        else:
+            print("no services")
             # selection = Service_info.query.order_by(Service_info.id).filter(and_(
             #     Service_info.location.ilike('%{}%'.format(loc)),
             #         Service_info.skill.ilike('%{}%'.format(skills)))).all()
-            current_servers = paginate_services(request, selection)
-            print(selection)
-            return jsonify({"success": True,
-                    "service": current_servers,
-                    "total_services": len(selection)})
+        current_servers = paginate_services(request, selection)
+        print(selection)
+        return jsonify({"success": True,
+                "service": current_servers,
+                "total_services": len(selection)})
     except Exception as e:
         print(e)
         abort(422)

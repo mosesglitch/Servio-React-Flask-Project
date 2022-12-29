@@ -4,6 +4,12 @@
   display: flex;
   column-gap: 10px;
 }
+.text-black > p {
+  font-size: large;
+}
+/* .bd-highlight > * {
+  background-color: yellow;
+} */
 .appheader {
   color: aliceblue !important;
   font-family: cursive;
@@ -21,11 +27,17 @@
   padding-left: 100px;
   border: 50px;
 }
-.navbar {
-  background-image: linear-gradient(
-    rgba(255, 220, 255, 0.5),
-    rgba(255, 255, 255, 0.5)
-  ) !important;
+.rounded-top {
+  padding-top: 20px;
+  border-top: 100px;
+}
+.img-thumbnail {
+  border-radius: 30px;
+  background-color: black;
+  padding-top: 0px;
+}
+.gradient-custom-2 .rounded-top {
+  background-image: linear-gradient(#dcdcdc, black) !important;
 }
 .App > * {
   flex: 1;
